@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>LangStars — the most-starred GitHub repos by language</title>
+  <meta name="description" content="Every GitHub repository with 20,000+ stars, grouped by primary language. Sort, filter, compare languages and see what's rising. Refreshed weekly.">
+  <meta property="og:title" content="LangStars">
+  <meta property="og:description" content="Every GitHub repository with 20,000+ stars, grouped by primary language. Refreshed every Monday.">
+  <link rel="alternate" type="application/rss+xml" title="LangStars: new over 20K" href="feed.xml">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>">
+  <script>
+    (function () {                       // theme before first paint; storage can be blocked (private mode, policies)
+      var t = null;
+      try { t = localStorage.getItem('ls-theme'); } catch (e) {}
+      document.documentElement.dataset.theme = t || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="sr skip" href="#app">Skip to content</a>
+  <header class="top">
+    <div class="top-in">
+      <a href="#/" class="brand" aria-label="LangStars home"><span class="logo">★</span> LangStars</a>
+      <label class="search">
+        <span class="sr">Search all repos</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 0 1 6.32 12.9l5.39 5.4-1.41 1.4-5.4-5.38A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
+        <input id="q" type="search" placeholder="Fuzzy search repos, descriptions, topics…" autocomplete="off" spellcheck="false">
+        <kbd aria-hidden="true">/</kbd>
+      </label>
+      <button id="keys-btn" class="icon-btn" type="button" title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts">⌨</button>
+      <button id="theme" class="icon-btn" type="button" title="Toggle dark mode (t)" aria-label="Toggle dark mode"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="vertical-align:-3px"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    </div>
+    <nav id="nav" class="langnav" aria-label="Pages and languages"></nav>
+  </header>
+  <main id="app" tabindex="-1"><div class="loading">Loading…</div></main>
+  <footer id="foot"></footer>
+  <dialog id="keys" aria-labelledby="keys-h">
+    <h2 id="keys-h">Keyboard shortcuts</h2>
+    <dl>
+      <dt><kbd>/</kbd></dt><dd>Search all repos</dd>
+      <dt><kbd>j</kbd> <kbd>k</kbd></dt><dd>Next / previous row</dd>
+      <dt><kbd>Enter</kbd></dt><dd>Open the selected repo</dd>
+      <dt><kbd>o</kbd></dt><dd>Open on GitHub</dd>
+      <dt><kbd>g</kbd> <kbd>a</kbd> <kbd>c</kbd></dt><dd>Overview · All repos · Compare</dd>
+      <dt><kbd>Esc</kbd></dt><dd>Clear search / back</dd>
+      <dt><kbd>t</kbd></dt><dd>Toggle dark mode</dd>
+      <dt><kbd>?</kbd></dt><dd>This help</dd>
+    </dl>
+    <form method="dialog"><button class="btn">Close</button></form>
+  </dialog>
+  <script src="vendor/fuse.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
