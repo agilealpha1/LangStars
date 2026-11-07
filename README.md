@@ -7,6 +7,8 @@
 [![Repos Tracked](https://img.shields.io/badge/repos%20%E2%89%A5%2020K%20%E2%98%85-1%2C911-f5b82e.svg)](#current-dataset-snapshot)
 [![Languages](https://img.shields.io/badge/languages-15-7aa2ff.svg)](#current-dataset-snapshot)
 
+**Live site:** [agilealpha1.github.io/LangStars](https://agilealpha1.github.io/LangStars/)
+
 LangStars catalogs every non-fork GitHub repository with **20,000+ stars** across **15 programming languages** (~1,911 repositories totaling **83M+ stars**). A dependency-light Python pipeline fetches, enriches, classifies, and snapshots the ecosystem every Monday via GitHub Actions, then compiles a fast, zero-build static web app and an open CC0 dataset for GitHub Pages.
 
 > **Same zero-backend philosophy as [SkillStars](https://github.com/agilealpha1/SkillStars)**: Python pipeline → validated static JSON + CC0 data bundle → vanilla JS SPA → GitHub Pages.
