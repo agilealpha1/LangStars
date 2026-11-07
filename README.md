@@ -6,7 +6,6 @@
 [![Data: CC0](https://img.shields.io/badge/data-CC0%201.0-brightgreen.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 [![Repos Tracked](https://img.shields.io/badge/repos%20%E2%89%A5%2020K%20%E2%98%85-1%2C911-f5b82e.svg)](#current-dataset-snapshot)
 [![Languages](https://img.shields.io/badge/languages-15-7aa2ff.svg)](#current-dataset-snapshot)
-[![Zero Infrastructure](https://img.shields.io/badge/cost-%240%2Fmo-success.svg)](#zero-cost-operations)
 
 LangStars catalogs every non-fork GitHub repository with **20,000+ stars** across **15 programming languages** (~1,911 repositories totaling **83M+ stars**). A dependency-light Python pipeline fetches, enriches, classifies, and snapshots the ecosystem every Monday via GitHub Actions, then compiles a fast, zero-build static web app and an open CC0 dataset for GitHub Pages.
 
@@ -20,7 +19,6 @@ LangStars catalogs every non-fork GitHub repository with **20,000+ stars** acros
 - [Current Dataset Snapshot](#current-dataset-snapshot)
 - [Architecture & Data Pipeline](#architecture--data-pipeline)
 - [Quickstart (Local Development)](#quickstart-local-development)
-- [Deploying to GitHub Pages](#deploying-to-github-pages)
 - [Open Data & JSON Schemas](#open-data--json-schemas)
 - [Customizing Languages & Taxonomy](#customizing-languages--taxonomy)
 - [Fault Tolerance & Safety Guarantees](#fault-tolerance--safety-guarantees)
@@ -161,32 +159,6 @@ make build
 
 > [!TIP]
 > Working without a `GITHUB_TOKEN`? `python3 pipeline/discover.py --max-seconds 150` stops cleanly with exit code `3` when the time budget is reached and resumes from `.cache/search/` on the next run.
-
----
-
-## Deploying to GitHub Pages
-
-LangStars uses relative asset and API paths throughout `site/`, so it works out of the box on root domains (`https://langstars.example.com/`) and project sub-paths (`https://<user>.github.io/LangStars/`) alike.
-
-1. Push this repository to GitHub on the `main` branch.
-2. Go to **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**.
-3. *(Optional)* Add `ANTHROPIC_API_KEY` under **Settings → Secrets and variables → Actions** if you want LLM-based repo categorization.
-4. Trigger **Actions → Refresh data and deploy Pages → Run workflow** (with `refresh: true`) for your first full token-backed build.
-
-### How `.github/workflows/pages.yml` Operates
-
-- **On `push` to `main`**: runs the test suite, builds `site_dist/` from the committed `data/` directory in seconds, and deploys to GitHub Pages.
-- **Every Monday at 04:00 UTC (`schedule`) & manual `workflow_dispatch`**:
-  1. Runs all unit tests.
-  2. Executes `bash deploy/update.sh` (discover → enrich → categorize → snapshot → validation build).
-  3. Commits updated `data/` back to `main` as `github-actions[bot]` (using `git pull --rebase -X theirs` with retry backoff to avoid race conditions).
-  4. Builds and deploys `site_dist/` to GitHub Pages.
-
-### Zero-Cost Operations
-
-- **GitHub Actions & Pages**: $0 for public repositories.
-- **GitHub API**: Uses the built-in `secrets.GITHUB_TOKEN` (~20–40 search requests + ~40 GraphQL requests per weekly run).
-- **Categorization**: $0 with the built-in keyword rule engine, or ~$0.50 one-time + pennies/week with `ANTHROPIC_API_KEY`.
 
 ---
 
